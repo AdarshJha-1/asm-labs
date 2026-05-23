@@ -1,8 +1,9 @@
 BITS 64
 default rel
 
-section .data
-msg: db "Hello World!", 0x0A ; message + newline
+; section .data
+; msg: db "Hello World!", 0x0A ; message + newline
+
 
 section .text
 global _start
@@ -19,3 +20,16 @@ _start:
     mov rax, 60         ; sys_exit
     xor rdi, rdi        ; status 0
     syscall 
+
+    ; jmp $
+    ; call _sum
+    ; jmp _sum
+
+; _sum:
+;     add rdi, rsi
+;     ret
+;     jmp $
+
+
+section .data       ; not executable under data section
+msg: db "Hello World!", 0x0A ; message + newline
