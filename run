@@ -1,0 +1,26 @@
+#!/bin/bash
+
+with_gcc=$1    # for me only so t = true, f = false
+fileName=$2
+
+# generate .o file in obj folder
+nasm -felf64 -o ./obj/"${fileName}.o" ${fileName}.asm
+
+
+# only linking part is done by either gcc or just ld
+if [[ $with_gcc == 't' ]]; then
+    # linking the file with gcc
+    gcc -no-pie -o ./bin/${fileName} ./obj/"${fileName}.o"
+else
+    # linking the file
+    ld -o ./bin/${fileName} ./obj/"${fileName}.o"
+fi
+
+# run the executable
+echo
+echo "---------- OUTPUT ----------"
+echo
+./bin/${fileName}
+
+# delete both .o and executable
+rm ./bin/${fileName} ./obj/"${fileName}.o"
